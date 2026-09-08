@@ -1,0 +1,12 @@
+{
+    "train_accuracy": 1.0,
+    "test_accuracy": 0.63,
+    "train_auc": 1.0,
+    "test_auc": 0.6359349832868598,
+    "train_loss": 0.023696651682257652,
+    "test_loss": 1.9427281618118286,
+    "accuracy_gap": 0.37,
+    "loss_gap": 1.9190315008163452,
+    "training_records": 1000,
+    "testing_records": 1000
+}
