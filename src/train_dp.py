@@ -34,8 +34,7 @@ LEARNING_RATE = 0.01
 MODEL_SEED = 42
 
 
-# Publicly defined medical ranges.
-# These replace a scaler trained on pooled private data.
+
 PUBLIC_MINIMUMS = np.array(
     [
         18,   # age
@@ -70,7 +69,6 @@ PUBLIC_MAXIMUMS = np.array(
 
 
 def scale_using_public_bounds(data):
-    """Scale data without calculating statistics from pooled patient records."""
 
     features = data[FEATURE_COLUMNS].to_numpy(dtype=np.float32)
 
@@ -89,7 +87,6 @@ def scale_using_public_bounds(data):
 
 
 def load_clients():
-    """Load each hospital separately."""
 
     membership = pd.read_csv(
         ROOT / "baseline_predictions.csv"
@@ -159,7 +156,6 @@ def copy_state_dict(state_dict):
 
 
 def average_models(state_dicts, client_weights):
-    """Federated averaging without receiving patient records."""
 
     total_weight = float(sum(client_weights))
     averaged_state = {}
@@ -184,7 +180,6 @@ def average_models(state_dicts, client_weights):
 
 
 def remove_opacus_prefix(private_state):
-    """Convert an Opacus model state into a normal PyTorch model state."""
 
     cleaned_state = {}
 
@@ -261,7 +256,6 @@ def create_private_clients(
 
 
 def train_federated_model(clients, target_epsilon):
-    # Same initial model for every epsilon experiment.
     torch.manual_seed(MODEL_SEED)
 
     initial_model = ReadmissionModel(
@@ -272,7 +266,6 @@ def train_federated_model(clients, target_epsilon):
         initial_model.state_dict()
     )
 
-    # Do not use a publicly fixed seed for DP noise.
     torch.seed()
 
     private_clients = create_private_clients(
@@ -303,7 +296,6 @@ def train_federated_model(clients, target_epsilon):
         )
 
         for client in private_clients:
-            # Each hospital receives the latest global model.
             client["model"].load_state_dict(
                 global_private_state
             )
@@ -349,7 +341,6 @@ def train_federated_model(clients, target_epsilon):
                 client["train_size"]
             )
 
-        # The central aggregator receives only model states.
         global_private_state = average_models(
             local_states,
             local_weights,
@@ -545,7 +536,6 @@ def main():
         all_predictions.append(predictions)
         all_metrics.append(metrics)
 
-        # Save only the selected deployment model.
         if target_epsilon == DEPLOYMENT_EPSILON:
             torch.save(
                 {
