@@ -1,0 +1,38 @@
+{
+    "overfit": {
+        "arm": "overfit",
+        "fit_accuracy": 0.8395833333333333,
+        "test_accuracy": 0.7143333333333334,
+        "fit_auc": 0.9030308792342032,
+        "test_auc": 0.7180486194546913,
+        "fit_loss": 0.3643518388271332,
+        "test_loss": 0.669943630695343,
+        "fit_records": 2400,
+        "test_records": 3000,
+        "accuracy_gap": 0.12524999999999997,
+        "loss_gap": 0.30559179186820984,
+        "loss_attack_auc_ceiling": 0.5626249999999999,
+        "seed": 0,
+        "epochs_used": 200,
+        "pos_weight": 2.5398230088495577,
+        "weight_decay": 0.0
+    },
+    "tuned": {
+        "arm": "tuned",
+        "fit_accuracy": 0.7325,
+        "test_accuracy": 0.713,
+        "fit_auc": 0.7944781913053012,
+        "test_auc": 0.7667141371064015,
+        "fit_loss": 0.5357441306114197,
+        "test_loss": 0.5537806749343872,
+        "fit_records": 2400,
+        "test_records": 3000,
+        "accuracy_gap": 0.019500000000000073,
+        "loss_gap": 0.01803654432296753,
+        "loss_attack_auc_ceiling": 0.50975,
+        "seed": 0,
+        "epochs_used": 33,
+        "pos_weight": 2.5398230088495577,
+        "weight_decay": 0.01
+    }
+}

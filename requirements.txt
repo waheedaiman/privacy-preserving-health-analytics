@@ -1,8 +1,8 @@
-numpy
-pandas
-scikit-learn
-torch
-opacus
-matplotlib
-scipy
-Faker
+# pin the versions. a different opacus release can report a different epsilon.
+numpy==2.5.3
+pandas==3.0.5
+scipy==1.18.1
+scikit-learn==1.9.0
+matplotlib==3.11.1
+torch==2.14.0
+opacus==1.6.0
